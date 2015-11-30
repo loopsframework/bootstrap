@@ -4,7 +4,7 @@ use Loops\Misc;
 use Loops\Application\WebApplication;
 
 try {
-    $root_dir = realpath(__DIR__."/../../../..");
+    $root_dir = realpath(__DIR__."/..");
 
     require_once("$root_dir/vendor/autoload.php");
 

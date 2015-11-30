@@ -1,0 +1,6 @@
+# mod_rewrite rules for apache
+# is the requested file was not found, redirect to index.php with url as a get parameter
+
+RewriteEngine On
+RewriteCond      %{REQUEST_FILENAME} !-f
+RewriteRule ^.*$ index.php?_url=/$0 [QSA,L,B]
