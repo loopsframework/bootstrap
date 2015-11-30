@@ -1,11 +1,9 @@
-# Temporary dockerfile
+# Dockerfile
 
 FROM ubuntu:15.04
 
 
 # Install required packages
-
-#libpcre3-dev                     \
 
 RUN apt-get update                                      && \
     apt-get --yes upgrade                               && \
@@ -27,10 +25,16 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin -
 
 # Prepare loops directory
 
-RUN mkdir /opt/loops && mkdir /opt/loops/app
+RUN mkdir /opt/loops
 
 WORKDIR /opt/loops
-    
+
+# Install Loops
+RUN composer create-project loopsframework/bootstrap:dev-master .
+# RUN composer require loopsframework/jobs
+RUN mv /opt/loops/app /opt/loops/app_skeleton
+RUN mkdir /opt/loops/app
+
 COPY docker/loops/* /opt/loops/
 COPY docker/nginx/nginx.conf /etc/nginx/
 COPY docker/nginx/snippets/* /etc/nginx/snippets/
@@ -39,11 +43,6 @@ COPY docker/supervisor/conf.d/* /etc/supervisor/conf.d/
 COPY docker/php5-fpm/php-fpm.conf /etc/php5/fpm/
 COPY docker/php5-fpm/www.conf /etc/php5/fpm/pool.d/
 COPY docker/init.sh /
-
-
-#temporary fix until loops2 is live on github
-COPY / /tmp/loops
-RUN composer install
 
 
 # add vendor/bin to path variable

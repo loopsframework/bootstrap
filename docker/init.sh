@@ -30,7 +30,7 @@ fi
 
 # copy skeleton to volume if it is empty and change the files inside to user/group of the directory
 if ! [ "$(ls -A /opt/loops/app)" ]; then
-   cp -a /opt/loops/vendor/loopsframework/loops2/app_skeleton/* /opt/loops/app
+   cp -a /opt/loops/app_skeleton/* /opt/loops/app
    if [ "$ENABLE_JOBS" ]; then
        mkdir /opt/loops/app/inc/Jobs
    fi
