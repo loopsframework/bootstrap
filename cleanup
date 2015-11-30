@@ -44,7 +44,7 @@ then
     if [ -z "$HAS_NGINX" ]
     then
         echo "Apache found. Removing nginx public directory ..."
-        rmdir -rf public
+        rm -rf public
     fi
 fi
 
