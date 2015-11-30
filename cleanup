@@ -85,7 +85,7 @@ if [ -n "$HAS_NGINX" ]
 then
     echo ""
     echo "Nginx:"
-    echo "    Please setup nginx to process loops/phalcon requests properly."
+    echo "    Please setup nginx to process Loops requests properly."
     echo ""
     echo "    Suggested server blocks:"
     echo ""
