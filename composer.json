@@ -1,0 +1,16 @@
+{
+    "name": "loopsframework/bootstrap",
+    "license": "MIT",
+    "require": {
+        "loopsframework/base": "*"
+    },
+    "authors": [
+        {
+            "name": "Lukas",
+            "email": "lukas@m-t.com"
+        }
+    ],
+    "scripts": {
+        "post-create-project-cmd": [ "./cleanup" ]
+    }
+}

@@ -1,0 +1,44 @@
+#!/bin/sh
+#
+# This file is part of the loops framework.
+#
+# @author Lukas <lukas@m-t.com>
+# @package loops
+# @license https://raw.githubusercontent.com/loopsframework/base/master/LICENSE
+#
+
+set -e
+
+TMP_FOLDER=loops
+LOOPS_FOLDER=`pwd`
+
+export LOOPS_FOLDER
+
+#download composer
+echo ""
+echo "Downloading Composer..."
+echo ""
+curl -O https://getcomposer.org/composer.phar
+
+#a directory to install into (composer needs an empty folder)
+mkdir $TMP_FOLDER
+
+#install
+echo ""
+echo "Installing Loops..."
+echo ""
+php composer.phar create-project loopsframework/bootstrap $TMP_FOLDER dev-master
+
+#move project to here
+mv $TMP_FOLDER/* $TMP_FOLDER/.gitignore .
+
+#create vendor/bin dir if it doesn't exist
+if [ ! -d vendor/bin ]; then
+    mkdir -p vendor/bin
+fi
+
+#move composer into bin directory
+mv composer.phar vendor/bin
+
+#remove temp folder
+rmdir $TMP_FOLDER

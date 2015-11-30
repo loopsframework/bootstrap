@@ -1,0 +1,11 @@
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "/tmp/loops"
+        }
+    ],
+    "require": {
+        "loopsframework/loops2": "dev-master"
+    }
+}

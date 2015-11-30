@@ -1,0 +1,11 @@
+server {
+    listen 443 default_server ssl;
+    listen [::]:443 default_server ipv6only=on;
+
+    # server_name
+    # snakeoil
+    # crt
+    # key
+
+    include snippets/loops.conf;
+}

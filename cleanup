@@ -1,0 +1,118 @@
+#!/bin/sh
+#
+# This file is part of the loops framework.
+#
+# It will clean up stuff after composers project-create.
+#
+# @author Lukas <lukas@m-t.com>
+# @package loops
+# @license https://raw.githubusercontent.com/loopsframework/base/master/LICENSE
+#
+
+HAS_APACHE=`ps ax | grep -v grep | grep apache`
+HAS_NGINX=`ps ax | grep -v grep | grep nginx`
+
+if [ -z "$LOOPS_FOLDER" ]
+then
+    LOOPS_FOLDER=`pwd`
+fi
+
+set -e
+
+echo "Simplifying composer.json ..."
+
+REQUIRELOOPS=`cat composer.json | grep loopsframework/base`
+rm composer.json
+echo "{"                                                >> composer.json
+echo "    \"require\": {"                               >> composer.json
+echo "$REQUIRELOOPS"                                    >> composer.json
+echo "    },"                                           >> composer.json
+echo "    \"config\": {"                                >> composer.json
+echo "        \"component-dir\":     \"app/public\","   >> composer.json
+echo "        \"component-baseurl\": \"/\""             >> composer.json
+echo "    }"                                            >> composer.json
+echo "}"                                                >> composer.json
+
+echo "Removing unnecessary files ...";
+
+find . -type f -name "README.md" -exec rm -f {} \;
+rm bootstrap
+rm cleanup
+
+if [ -n "$HAS_APACHE" ]
+then
+    if [ -z "$HAS_NGINX" ]
+    then
+        echo "Apache found. Removing nginx public directory ..."
+        rm public/index.php
+        rmdir public
+    fi
+fi
+
+if [ -n "$HAS_NGINX" ]
+then
+    if [ -z "$HAS_APACHE" ]
+    then
+        echo "Nginx found. Removing apaches .htaccess and index.php ..."
+        rm app/public/index.php
+        rm app/public/.htaccess
+    fi
+fi
+
+echo "all done."
+echo ""
+echo ""
+echo "Loops is ready!";
+echo ""
+
+if [ "x$HAS_APACHE$HAS_NGINX" = "x" ]; then
+    echo ""
+    echo "No webserver found. Please create your index.php manually."
+    echo "https://github.com/loopsframework/base/blob/master/README.md"
+    echo ""
+fi
+
+if [ -n "$HAS_APACHE" ]
+then
+    echo ""
+    echo "Apache:"
+    echo "    Please access the folder '$LOOPS_FOLDER/app/public' via apache to use loops."
+    echo "    Make sure that mod_rewrite is activated."
+    echo ""
+fi
+
+if [ -n "$HAS_NGINX" ]
+then
+    echo ""
+    echo "Nginx:"
+    echo "    Please setup nginx to process loops/phalcon requests properly."
+    echo ""
+    echo "    Suggested server blocks:"
+    echo ""
+    echo "        location / {"
+    echo "                root $LOOPS_FOLDER/app/public;"
+    echo "                try_files \$uri @loops;"
+    echo "        }"
+    echo ""
+    echo "        location @loops {"
+    echo "                root $LOOPS_FOLDER/public;"
+    echo ""
+    echo "                rewrite ^.*\$ index.php?_url=\$uri&\$args break;"
+    echo ""
+    echo "                # adjust this"
+    echo "                fastcgi_pass unix:/var/run/php5-fpm.sock;"
+    echo ""
+    echo "                # adjust this"
+    echo "                include fastcgi_params;"
+    echo ""
+    echo "                fastcgi_param SCRIPT_FILENAME \$document_root/index.php;"
+    echo "        }"
+    echo ""
+    echo ""
+fi
+
+echo ""
+echo "To learn more about Loops default folder structure visit:"
+echo ""
+echo "    https://github.com/loopsframework/bootstrap"
+echo ""
