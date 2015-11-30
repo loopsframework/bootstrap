@@ -100,9 +100,9 @@ fi
 
 
 #start services
-# if [ "$ENABLE_JOBS" ]; then
-#     sed -i -- "s/autostart=false/autostart=true/g" "/etc/supervisor/conf.d/loopsjobs.conf"
-# fi
+if [ "$ENABLE_JOBS" ]; then
+    sed -i -- "s/autostart=false/autostart=true/g" "/etc/supervisor/conf.d/loopsjobs.conf"
+fi
 
 # get our logging to stdout for docker
 tail -n +0 -F /var/log/syslog &

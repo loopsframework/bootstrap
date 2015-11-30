@@ -31,7 +31,7 @@ WORKDIR /opt/loops
 
 # Install Loops
 RUN composer create-project loopsframework/bootstrap:dev-master .
-# RUN composer require loopsframework/jobs
+RUN composer require loopsframework/jobs
 RUN mv /opt/loops/app /opt/loops/app_skeleton
 RUN mkdir /opt/loops/app
 
