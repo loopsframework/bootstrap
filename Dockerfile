@@ -11,8 +11,8 @@ RUN apt-get update                                      && \
                           php5-mysql                       \
                           php5-sqlite                      \
                           php5-pgsql                       \
-                          php5-memcache                    \
                           php5-mcrypt                      \
+                          php-apc                          \
                           nginx                            \
                           git                              \
                           supervisor                       \
