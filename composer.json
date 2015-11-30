@@ -2,8 +2,9 @@
     "name": "loopsframework/bootstrap",
     "license": "MIT",
     "require": {
-        "loopsframework/base": "*"
+        "loopsframework/base": "dev-master"
     },
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Lukas",
