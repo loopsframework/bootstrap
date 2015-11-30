@@ -4,7 +4,6 @@
     "require": {
         "loopsframework/base": "dev-master"
     },
-    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Lukas",

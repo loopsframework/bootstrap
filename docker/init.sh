@@ -100,7 +100,7 @@ fi
 
 
 #start services
-if [ "$ENABLE_JOBS" ]; then
+if [ $ENABLE_JOBS ]; then
     sed -i -- "s/autostart=false/autostart=true/g" "/etc/supervisor/conf.d/loopsjobs.conf"
 fi
 
