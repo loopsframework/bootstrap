@@ -36,10 +36,7 @@ echo "}"                                                >> composer.json
 echo "Removing unnecessary files ...";
 
 find . -type f -name "README.md" -exec rm -f {} \;
-rm bootstrap
-rm cleanup
-rm -rf docker
-rm Dockerfile
+rm -rf bootstrap cleanup docker Dockerfile
 
 if [ -n "$HAS_APACHE" ]
 then
@@ -79,6 +76,10 @@ then
     echo "Apache:"
     echo "    Please access the folder '$LOOPS_FOLDER/app/public' via apache to use loops."
     echo "    Make sure that mod_rewrite is activated."
+    echo ""
+    echo "    Setup after a default apache installation on Ubuntu:"
+    echo "        mv /var/www/html /var/www/html.bak"
+    echo "        ln -s $LOOPS_FOLDER/app/public /var/www/html"
     echo ""
 fi
 
