@@ -35,7 +35,7 @@ echo "}"                                                >> composer.json
 
 echo "Removing unnecessary files ...";
 
-find . -type f -name "README.md" -exec rm -f {} \;
+find app -type f -name "README.md" -exec rm -f {} \;
 rm -rf bootstrap cleanup docker Dockerfile
 
 if [ -n "$HAS_APACHE" ]
