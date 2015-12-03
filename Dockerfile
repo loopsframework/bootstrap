@@ -1,7 +1,12 @@
 # Dockerfile
 
-FROM ubuntu:15.04
+# This file is part of the loops framework.
+# 
+# @author Lukas <lukas@m-t.com>
+# @license https://raw.githubusercontent.com/loopsframework/base/master/LICENSE
+# @link https://github.com/loopsframework/base
 
+FROM ubuntu:15.04
 
 # Install required packages
 

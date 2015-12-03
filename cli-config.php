@@ -5,7 +5,7 @@ use Loops\Application\CliApplication;
 
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 
-require_once(__DIR__."/../vendor/autoload.php");
+require_once(__DIR__."/vendor/autoload.php");
 
 class HelperSetCreator extends CliApplication {
     public function exec($params) {

@@ -1,4 +1,11 @@
 <?php
+/**
+ * This file is part of the loops framework.
+ *
+ * @author Lukas <lukas@m-t.com>
+ * @license https://raw.githubusercontent.com/loopsframework/base/master/LICENSE
+ * @link https://github.com/loopsframework/base
+ */
 
 use Loops\Misc;
 use Loops\Application\WebApplication;
