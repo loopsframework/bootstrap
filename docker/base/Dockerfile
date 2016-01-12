@@ -35,19 +35,19 @@ RUN mkdir /opt/loops
 WORKDIR /opt/loops
 
 # Install Loops
-RUN composer create-project loopsframework/bootstrap:dev-master .
-RUN composer require loopsframework/jobs:dev-master
+RUN composer create-project loopsframework/bootstrap:dev-master .               && \
+    composer require loopsframework/jobs:dev-master
 RUN mv /opt/loops/app /opt/loops/app_skeleton
 RUN mkdir /opt/loops/app
 
-COPY docker/loops/* /opt/loops/
-COPY docker/nginx/nginx.conf /etc/nginx/
-COPY docker/nginx/snippets/* /etc/nginx/snippets/
-COPY docker/supervisor/supervisord.conf /etc/supervisor/
-COPY docker/supervisor/conf.d/* /etc/supervisor/conf.d/
-COPY docker/php5-fpm/php-fpm.conf /etc/php5/fpm/
-COPY docker/php5-fpm/www.conf /etc/php5/fpm/pool.d/
-COPY docker/init.sh /
+COPY loops/* /opt/loops/
+COPY nginx/nginx.conf /etc/nginx/
+COPY nginx/snippets/* /etc/nginx/snippets/
+COPY supervisor/supervisord.conf /etc/supervisor/
+COPY supervisor/conf.d/* /etc/supervisor/conf.d/
+COPY php5-fpm/php-fpm.conf /etc/php5/fpm/
+COPY php5-fpm/www.conf /etc/php5/fpm/pool.d/
+COPY init.sh /
 
 
 # add vendor/bin to path variable
