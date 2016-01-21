@@ -83,8 +83,8 @@ if [ "$ENABLE_HTTPS" ]; then
         sed -i -- "s/# server_name/server_name = $HOSTNAME;/g" "/etc/nginx/sites-available/$HOSTNAME-ssl"
 
         if [ -f "/etc/nginx/certs/$ENABLE_HTTPS.key" ] && [ -f "/etc/nginx/certs/$ENABLE_HTTPS.crt" ]; then
-            sed -i -- "s/# key/ssl_certificate     certs\/$ENABLE_HTTPS.key;/g" "/etc/nginx/sites-available/$HOSTNAME-ssl"
-            sed -i -- "s/# crt/ssl_certificate_key certs\/$ENABLE_HTTPS.crt;/g" "/etc/nginx/sites-available/$HOSTNAME-ssl"
+            sed -i -- "s/# key/ssl_certificate     certs\/$ENABLE_HTTPS.crt;/g" "/etc/nginx/sites-available/$HOSTNAME-ssl"
+            sed -i -- "s/# crt/ssl_certificate_key certs\/$ENABLE_HTTPS.key;/g" "/etc/nginx/sites-available/$HOSTNAME-ssl"
         else
             sed -i -- "s/# snakeoil/include snippets\/snakeoil.conf;/g" "/etc/nginx/sites-available/$HOSTNAME-ssl"
             echo "Using self-signed certificate for HTTPS!"
