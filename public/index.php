@@ -14,9 +14,11 @@ try {
     $root_dir = realpath(__DIR__."/..");
 
     require_once("$root_dir/vendor/autoload.php");
-
-    $app = new WebApplication("$root_dir/app/");
-    $app->initialize($_GET["_url"], NULL, array_diff_key($_GET, array_flip(["_url"])));
+    
+    $url = $_GET["_url"];
+    unset($_GET["_url"]);
+    
+    $app = new WebApplication("$root_dir/app/", $url);
     $app->run();
 }
 catch(Exception $e) {
