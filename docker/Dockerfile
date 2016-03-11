@@ -10,9 +10,9 @@ FROM ubuntu:xenial
 
 # Install packages
 
-RUN apt-get update                                     
-RUN apt-get --yes upgrade                              
-RUN apt-get --yes install php7.0-fpm                       \
+RUN apt-get update                                      && \
+    apt-get --yes upgrade                               && \
+    apt-get --yes install php7.0-fpm                       \
                           php7.0-mysql                     \
                           php7.0-pgsql                     \
                           php7.0-sqlite                    \
@@ -31,7 +31,9 @@ RUN apt-get --yes install php7.0-fpm                       \
                           ssl-cert                         \
                           rsyslog                          \
                           libxrender1                      \
-                          xvfb
+                          xvfb                          && \
+    apt-get clean                                       && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # install composer
 
